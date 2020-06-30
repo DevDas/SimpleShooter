@@ -40,6 +40,10 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &AShooterCharacter::StopJumping);
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AShooterCharacter::BeginCrouch);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AShooterCharacter::EndCrouch);
+
+	// XBox Controller
+	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookUpRate);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookRightRate);
 }
 
 void AShooterCharacter::MoveForward(float Value)
@@ -61,3 +65,13 @@ void AShooterCharacter::EndCrouch()
 {
 	UnCrouch();
 }
+
+ void AShooterCharacter::LookUpRate(float Value)
+{
+	 AddControllerPitchInput(Value * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+ void AShooterCharacter::LookRightRate(float Value)
+ {
+	 AddControllerYawInput(Value * RotationRate * GetWorld()->GetDeltaSeconds());
+ }

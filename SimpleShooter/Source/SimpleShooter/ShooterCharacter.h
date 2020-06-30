@@ -32,4 +32,10 @@ private:
 
 	void BeginCrouch();
 	void EndCrouch();
+
+	void LookUpRate(float Value);
+	void LookRightRate(float Value);
+
+	UPROPERTY(EditAnywhere)
+	float RotationRate = 10;
 };
