@@ -15,6 +15,8 @@ public:
 	// Sets default values for this actor's properties
 	AGun();
 
+	void PullTrigger();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -25,10 +27,14 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class USkeletalMeshComponent* SkeletalMesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
+	class UParticleSystem* MuzzleFX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
+		float TraceLength;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
-private:
 };

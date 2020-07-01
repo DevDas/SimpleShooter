@@ -44,6 +44,9 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AShooterCharacter::BeginCrouch);
 	PlayerInputComponent->BindAction("Crouch", IE_Released, this, &AShooterCharacter::EndCrouch);
 
+	//Shoot
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AShooterCharacter::StartFire);
+
 	// XBox Controller
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookUpRate);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookRightRate);
@@ -77,4 +80,13 @@ void AShooterCharacter::EndCrouch()
  void AShooterCharacter::LookRightRate(float Value)
  {
 	 AddControllerYawInput(Value * RotationRate * GetWorld()->GetDeltaSeconds());
+ }
+
+ void AShooterCharacter::StartFire()
+ {
+	 Gun->PullTrigger();
+ }
+
+ void AShooterCharacter::StopFire()
+ {
  }

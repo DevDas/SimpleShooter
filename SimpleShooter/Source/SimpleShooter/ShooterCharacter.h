@@ -22,7 +22,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapons")
 	TSubclassOf<class AGun> GunClass;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapons")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapons")
 	class AGun* Gun;
 
 public:	
@@ -44,4 +44,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10;
+
+	void StartFire();
+	void StopFire();
 };
