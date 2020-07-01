@@ -31,7 +31,10 @@ protected:
 	class UParticleSystem* MuzzleFX;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
-		float TraceLength;
+	class UParticleSystem* ImpactFX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
+	float TraceLength;
 
 public:	
 	// Called every frame
