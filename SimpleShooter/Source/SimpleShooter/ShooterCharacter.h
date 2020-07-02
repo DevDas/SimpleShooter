@@ -37,7 +37,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Health")
 	float MaxHealth = 100;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	float Health;
+
+	UFUNCTION(BlueprintPure)
+		bool IsDied() const { return Health <= 0; };
 
 private:
 	void MoveForward(float Value);
