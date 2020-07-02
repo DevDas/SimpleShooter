@@ -19,7 +19,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI")
-	float AcceptanceRadius;
+	float AcceptanceRadius = 200;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI")
+		class UBehaviorTree* AIBehavior;
 
 public:
 
