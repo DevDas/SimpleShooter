@@ -2,15 +2,13 @@
 
 #include "ShooterAIController.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 void AShooterAIController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	if (!PlayerPawn) return;
-	SetFocus(PlayerPawn);
 	
+	AcceptanceRadius = 200;
 }
 
 void AShooterAIController::Tick(float DeltaTime)
@@ -20,5 +18,17 @@ void AShooterAIController::Tick(float DeltaTime)
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	if (!PlayerPawn) return;
 
-	MoveToActor(PlayerPawn, 200);
+	// LineOfSightTo
+	if (LineOfSightTo(PlayerPawn, GetPawn()->GetPawnViewLocation(), true))
+	{
+		MoveToActor(PlayerPawn, AcceptanceRadius);
+		SetFocus(PlayerPawn);
+
+		DrawDebugLine(GetWorld(), GetPawn()->GetPawnViewLocation(), GetPawn()->GetPawnViewLocation() + GetPawn()->GetViewRotation().Vector() * 1000, FColor::Red);
+	}
+	else
+	{
+		ClearFocus(EAIFocusPriority::Gameplay);
+		StopMovement();
+	}
 }

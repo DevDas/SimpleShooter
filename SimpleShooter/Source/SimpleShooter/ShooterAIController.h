@@ -18,6 +18,9 @@ protected:
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI")
+	float AcceptanceRadius;
+
 public:
 
 	virtual void Tick(float DeltaTime) override;
