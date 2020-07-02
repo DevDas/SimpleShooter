@@ -7,26 +7,18 @@ void AShooterAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	APawn* MyPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	if (!MyPawn) return;
-	SetFocus(MyPawn);
-
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	if (!PlayerPawn) return;
+	SetFocus(PlayerPawn);
+	
 }
 
 void AShooterAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	APawn* MyPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	if (!MyPawn) return;
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	if (!PlayerPawn) return;
 
-	auto PawnLocation = MyPawn->GetActorLocation();
-	auto AILoc = GetPawn()->GetActorLocation();
-	auto Direc = (PawnLocation - AILoc).GetSafeNormal();
-
-	
-	if ((PawnLocation - AILoc).Size() >= 500)
-	{
-		GetPawn()->AddMovementInput(Direc);
-	}
+	MoveToActor(PlayerPawn, 200);
 }
