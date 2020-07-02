@@ -7,7 +7,6 @@
 #include "Particles/ParticleSystem.h"
 #include "DrawDebugHelpers.h"
 
-// Sets default values
 AGun::AGun()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -51,6 +50,12 @@ void AGun::PullTrigger()
 	{
 		FVector ShotDirection = -Rotation.Vector();
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactFX, Hit.Location, ShotDirection.Rotation());
+
+		AActor* HitActor = Hit.GetActor();
+		if (!HitActor) return;
+
+		FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
+		HitActor->TakeDamage(Damage, DamageEvent, Controller, this);
 	}
 }
 

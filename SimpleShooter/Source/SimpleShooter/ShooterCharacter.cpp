@@ -1,12 +1,14 @@
 // @Copyright DevDasTour
 
 #include "ShooterCharacter.h"
+#include "DrawDebugHelpers.h"
 #include "Gun.h"
 
 AShooterCharacter::AShooterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	Health = MaxHealth;
 }
 
 void AShooterCharacter::BeginPlay()
@@ -50,6 +52,19 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	// XBox Controller
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookUpRate);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookRightRate);
+}
+
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	Health -= DamageToApply;
+
+
+	FString HealthToString = FString::FromInt(Health);
+	DrawDebugString(GetWorld(), GetActorLocation(), HealthToString, NULL, FColor::Purple, 2, false, 3.f);
+	return DamageToApply;
 }
 
 void AShooterCharacter::MoveForward(float Value)
