@@ -14,6 +14,7 @@ void AShooterAIController::BeginPlay()
 	{
 		RunBehaviorTree(AIBehavior);
 	}
+	GetBlackboardComponent()->SetValueAsVector("StartLocation", GetPawn()->GetActorLocation());
 }
 
 void AShooterAIController::Tick(float DeltaTime)
