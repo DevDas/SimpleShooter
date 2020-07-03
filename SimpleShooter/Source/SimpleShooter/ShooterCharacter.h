@@ -34,14 +34,17 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float MaxHealth = 100;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
 	float Health;
 
 	UFUNCTION(BlueprintPure)
-		bool IsDied() const { return Health <= 0; };
+	bool IsDied() const { return Health <= 0; };
+
+	void StartFire();
+	void StopFire();
 
 private:
 	void MoveForward(float Value);
@@ -55,7 +58,4 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10;
-
-	void StartFire();
-	void StopFire();
 };

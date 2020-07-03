@@ -13,7 +13,6 @@ EBTNodeResult::Type UBTTask_ClearBlackboardValue::ExecuteTask(UBehaviorTreeCompo
 {
 	Super::ExecuteTask(OwnerComp, NodeMemory);
 
-	OwnerComp.GetBlackboardComponent()->ClearValue("LastKnownPlayerLocation");
-	GetSelectedBlackboardKey();
+	OwnerComp.GetBlackboardComponent()->ClearValue(GetSelectedBlackboardKey());
 	return EBTNodeResult::Succeeded;
 }

@@ -63,7 +63,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 
 	FString HealthToString = FString::FromInt(Health);
-	DrawDebugString(GetWorld(), GetActorLocation(), HealthToString, NULL, FColor::Purple, 2, false, 3.f);
+	DrawDebugString(GetWorld(), GetActorLocation(), HealthToString, NULL, FColor::Red, 2, false, 3.f);
 	return DamageToApply;
 }
 
