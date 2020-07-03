@@ -3,6 +3,8 @@
 #include "ShooterCharacter.h"
 #include "DrawDebugHelpers.h"
 #include "Gun.h"
+#include "Components/CapsuleComponent.h"
+#include "ShooterAIController.h"
 
 AShooterCharacter::AShooterCharacter()
 {
@@ -60,6 +62,13 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
+
+	if (IsDied())
+	{
+		OnDead.Broadcast();
+		//DetachFromControllerPendingDestroy();  // Changed To SetViewTargetWithBlend in Blueprint
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 
 	FString HealthToString = FString::FromInt(Health);

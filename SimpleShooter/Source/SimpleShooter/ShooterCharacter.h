@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "ShooterCharacter.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDead);
+
 UCLASS()
 class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 {
@@ -45,6 +47,9 @@ public:
 
 	void StartFire();
 	void StopFire();
+
+	UPROPERTY(BlueprintAssignable, Category = "CustomDelegate")
+	FOnDead OnDead;
 
 private:
 	void MoveForward(float Value);
