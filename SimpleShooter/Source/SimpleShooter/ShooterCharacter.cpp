@@ -5,10 +5,12 @@
 #include "Gun.h"
 #include "Components/CapsuleComponent.h"
 #include "ShooterAIController.h"
+#include "SimpleShooterGameModeBase.h"
 
 AShooterCharacter::AShooterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
 }
 
 void AShooterCharacter::BeginPlay()
@@ -63,13 +65,20 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
 
+
+
 	if (IsDied())
 	{
 		OnDead.Broadcast();
 		//DetachFromControllerPendingDestroy();  // Changed To SetViewTargetWithBlend in Blueprint
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	}
 
+		ASimpleShooterGameModeBase* GM = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();
+		if (GM)
+		{
+			GM->PawnKilled(this);
+		}
+	}
 
 	FString HealthToString = FString::FromInt(Health);
 	DrawDebugString(GetWorld(), GetActorLocation(), HealthToString, NULL, FColor::Red, 2, false, 3.f);

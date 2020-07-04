@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// @Copyright DevDasTour 
 
 #pragma once
 
@@ -14,4 +14,7 @@ class SIMPLESHOOTER_API ASimpleShooterGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+
+	virtual void PawnKilled(APawn* PawnKilled);
 };

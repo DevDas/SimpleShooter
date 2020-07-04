@@ -1,5 +1,8 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
+// @Copyright DevDasTour 
 
 #include "SimpleShooterGameModeBase.h"
 
+void ASimpleShooterGameModeBase::PawnKilled(APawn* PawnKilled)
+{
+
+}

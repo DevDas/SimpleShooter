@@ -39,10 +39,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float MaxHealth = 100;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
 	float Health;
 
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, Category = "Health")
 	bool IsDied() const { return Health <= 0; };
 
 	void StartFire();
