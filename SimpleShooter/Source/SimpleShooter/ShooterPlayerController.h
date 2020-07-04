@@ -24,4 +24,7 @@ private:
 	float RestartDelay = 5.f;
 
 	FTimerHandle RestartTimer;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> GameOverWidgetClass;
 };
