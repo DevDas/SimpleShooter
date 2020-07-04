@@ -9,7 +9,7 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
 
-	UUserWidget* GameOverScreen =  CreateWidget(this, GameOverWidgetClass, "GameOverScreen");
+	UUserWidget* GameOverScreen = CreateWidget(this, GameOverWidgetClass, "GameOverScreen");
 	if (GameOverScreen)
 	{
 		GameOverScreen->AddToViewport();
