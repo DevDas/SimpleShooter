@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
 #include "DrawDebugHelpers.h"
+#include "Sound/SoundBase.h"
 
 AGun::AGun()
 {
@@ -23,6 +24,7 @@ AGun::AGun()
 void AGun::PullTrigger()
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFX, SkeletalMesh, "MuzzleFlashSocket");
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, SkeletalMesh, "MuzzleFlashSocket");
 
 	FHitResult Hit;
 	FVector ShotDirection;
@@ -34,6 +36,7 @@ void AGun::PullTrigger()
 	{
 
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactFX, Hit.Location, ShotDirection.Rotation());
+		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ImpactSound, Hit.Location);
 
 		AActor* HitActor = Hit.GetActor();
 		if (!HitActor) return;

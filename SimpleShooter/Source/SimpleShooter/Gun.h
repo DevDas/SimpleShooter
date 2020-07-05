@@ -39,6 +39,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 	float Damage = 10;
 
+	// Sound
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	class USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	class USoundBase* ImpactSound;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
