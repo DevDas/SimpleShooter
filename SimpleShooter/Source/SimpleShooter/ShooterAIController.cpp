@@ -18,6 +18,17 @@ void AShooterAIController::BeginPlay()
 	GetBlackboardComponent()->SetValueAsVector("StartLocation", GetPawn()->GetActorLocation());
 }
 
+bool AShooterAIController::IsDead() const
+{
+	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(GetPawn());
+	if (ControlledCharacter)
+	{
+		return ControlledCharacter->IsDied();
+	}
+
+	return true;
+}
+
 void AShooterAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

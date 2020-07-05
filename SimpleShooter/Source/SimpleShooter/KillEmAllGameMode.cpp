@@ -4,16 +4,27 @@
 #include "ShooterPlayerController.h"
 #include "EngineUtils.h"
 #include "GameFramework/Controller.h"
+#include "ShooterAIController.h"
 
 void AKillEmAllGameMode::PawnKilled(APawn* PawnKilled)
 {
 	Super::PawnKilled(PawnKilled);
 
-	APlayerController* PC = Cast<APlayerController>(PawnKilled->GetController());
+	AShooterPlayerController* PC = Cast<AShooterPlayerController>(PawnKilled->GetController());
 	if (PC)
 	{
 		EndGame(false);
+		return;
 	}
+
+	for (AShooterAIController* AIController : TActorRange<AShooterAIController>(GetWorld()))
+	{
+		if (!AIController->IsDead())
+		{
+			return;
+		}
+	}
+	EndGame(true);
 }
 
 void AKillEmAllGameMode::EndGame(bool bIsPlayerWinner)

@@ -27,4 +27,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> GameOverWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> GameWinWidgetClass;
 };
