@@ -23,5 +23,15 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 		GameOverScreen->AddToViewport();
 	}
 
+	Crosshair->RemoveFromViewport();
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay, false);
+}
+
+void AShooterPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Crosshair = CreateWidget(this, CrosshairClass, "Crosshair");
+	if (!Crosshair) return;
+	Crosshair->AddToViewport();
 }

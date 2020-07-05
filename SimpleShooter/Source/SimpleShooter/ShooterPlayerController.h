@@ -18,6 +18,10 @@ public:
 
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+protected:
+
+	virtual void BeginPlay() override;
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Respawn")
@@ -30,4 +34,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> GameWinWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> CrosshairClass;
+
+	class UUserWidget* Crosshair;
 };
