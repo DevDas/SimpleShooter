@@ -34,7 +34,6 @@ void AGun::PullTrigger()
 
 	if (bSuccess)
 	{
-
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactFX, Hit.Location, ShotDirection.Rotation());
 		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), ImpactSound, Hit.Location);
 
